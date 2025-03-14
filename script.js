@@ -14,7 +14,7 @@ function idadeAposentadoria(dataNascimento, genero) {
 }
 
 function anosDeServico25(diasAverbados, ingressoTRT) {
-  const diasCorretos = 9125 - diasAverbados - 1;
+  const diasCorretos = 9125 - diasAverbados;
   let dtInicial = new Date(ingressoTRT.split("/").reverse().join("-"));
   dtInicial.setDate(dtInicial.getDate() + diasCorretos);
   return dtInicial.toLocaleDateString("pt-BR");
