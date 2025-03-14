@@ -13,11 +13,37 @@ function idadeAposentadoria(dataNascimento, genero) {
   return data.toLocaleDateString("pt-br");
 }
 
-function anosDeServico25(diasAverbados, ingressoTRT) {
-  const diasCorretos = 9125 - diasAverbados;
+function anosDeServico25(diasAverbados, ingressoTRT, deducoes) {
+  const diasCorretos = 9125 - (diasAverbados -- deducoes);
   let dtInicial = new Date(ingressoTRT.split("/").reverse().join("-"));
   dtInicial.setDate(dtInicial.getDate() + diasCorretos);
   return dtInicial.toLocaleDateString("pt-BR");
+}
+
+function calcularPeriodo(dataInicial, dataFinal) {
+  let dtInicial = new Date(dataInicial.split('/').reverse().join('-'));
+  let dtFinal = new Date(dataFinal.split('/').reverse().join('-'));
+  
+  if (dtFinal < dtInicial) {
+      return "A data final deve ser posterior à data inicial.";
+  }
+  
+  let anos = dtFinal.getFullYear() - dtInicial.getFullYear();
+  let meses = dtFinal.getMonth() - dtInicial.getMonth();
+  let dias = dtFinal.getDate() - dtInicial.getDate();
+  
+  if (dias < 0) {
+      meses--;
+      dias += new Date(dtInicial.getFullYear(), dtInicial.getMonth() + 1, 0).getDate();
+  }
+  if (meses < 0) {
+      anos--;
+      meses += 12;
+  }
+  
+  let diasTotais = Math.floor((dtFinal - dtInicial) / (1000 * 60 * 60 * 24));
+  
+  return `${anos} anos, ${meses} meses e ${dias} dias\nTotal de dias: ${diasTotais} dias`;
 }
 
 function enviar() {
@@ -25,6 +51,7 @@ function enviar() {
   const genero = document.getElementById("idGenero").value.toUpperCase();
   const diasAverbados = document.getElementById("idDiasAverbados").value;
   const ingressoTRT = document.getElementById("idIngressoTRT").value;
+  const deducoes = document.getElementById("idDeducoes").value;
 
   const pIdadeAposentadoria = document.getElementById("idIdadeAposentadoria");
   pIdadeAposentadoria.innerHTML =
@@ -32,5 +59,5 @@ function enviar() {
   const p25AnosServico = document.getElementById("Id25AnosDeContribuicao");
   p25AnosServico.innerHTML =
     "25 anos de Contribuição em: " +
-    anosDeServico25(diasAverbados, ingressoTRT);
+    anosDeServico25(diasAverbados, ingressoTRT, deducoes);
 }
