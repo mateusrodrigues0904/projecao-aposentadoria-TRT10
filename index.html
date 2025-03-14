@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js"></script>
     <title>Projeção de aposentadoria - TRT10</title>
-</head>
-<body>
-    <label for="idade">Idade: </label>
-    <input type="number" name="idade" id="ididade">
-    <br><br>
-    <label for="sexo">Sexo (M ou H): </label>
-    <input type="text" name="sexo" id="idsexo">
-    <br><br>
-    <label for="contribuicaoT">Contribuição Total (dias): </label>
-    <input type="number" name="contribuicaoT" id="idcontribuicaoT">
-    <br><br>
-    <label for="diassp">Dias totais averbados: </label>
-    <input type="number" name="diassp" id="iddiassp">
-    <br><br>
-    <label for="diasnsp">Dias averbados fora do serviço público: </label>
-    <input type="number" name="diasnsp" id="iddiasnsp">
-    <br><br>
-    <input onclick="resultados()" type="submit" value="Enviar">
-    <br><br>
-    <p id="Plresultado"></p>
-    <p id="Slresultado"></p>
-    <p id="Tlresultado"></p>
-</body>
-<script src="script.js"></script>
+  </head>
+  <body style="background-color: #262524; color: white">
+    <h1>Projeção de Aposentadoria - TRT10</h1>
+    <br /><br />
+    <label for="dataNascimento">Data de Nascimento: </label>
+    <input type="date" name="dataNascimento" id="idDataNascimento" />
+    <br /><br />
+    <label for="genero">Gênero (M ou F): </label>
+    <input type="text" name="genero" id="idGenero" />
+    <br /><br />
+    <label for="diasAverbados">Dias averbados: </label>
+    <input type="number" name="diasAverbados" id="idDiasAverbados" />
+    <br /><br />
+    <label for="ingressoTRT">Ingresso no TRT10</label>
+    <input type="date" name="ingressoTRT" id="idIngressoTRT" />
+    <br /><br />
+    <input type="submit" value="Enviar" onclick="enviar()" />
+    <br /><br />
+    <p id="idIdadeAposentadoria"></p>
+    <p id="Id25AnosDeContribuicao"></p>
+  </body>
 </html>
