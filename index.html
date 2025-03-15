@@ -24,9 +24,24 @@
     <label for="deducoes">Deduções: </label>
     <input type="number" name="deducoes" id="idDeducoes" />
     <br /><br />
+    <div id="periodo10AnosServico">
+      <label for="10anosServico1Inicio">Data inicio serviço público: </label>
+      <input
+        type="date"
+        name="10anosServico1Inicio"
+        id="id10anosServico1Inicio"
+      />
+      <br /><br />
+      <label for="10anosServico1Fim">Data fim serviço público</label>
+      <input type="date" name="10anosServico1Fim" id="id10anosServico1Fim" />
+      <br /><br />
+      <input type="button" value="+ tempo de serviço" onclick="adicionarPromptTS()"/>
+    </div>
+    <br /><br />
     <input type="submit" value="Enviar" onclick="enviar()" />
     <br /><br />
     <p id="idIdadeAposentadoria"></p>
     <p id="Id25AnosDeContribuicao"></p>
+    <p id="id10AnosServicoPublico"></p>
   </body>
 </html>
