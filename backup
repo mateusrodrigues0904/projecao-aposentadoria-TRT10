@@ -1,0 +1,46 @@
+    // let dataInicio = periodo.querySelector(
+    //   "input[name^='10anosServico'][name$='Inicio']"
+    // ).value;
+    // let dataFim = periodo.querySelector(
+    //   "input[name^='10anosServico'][name$='Fim']"
+    // ).value;
+
+    // if (dataInicio && dataFim) {
+    //   let resultado = calcularPeriodo(
+    //     dataInicio.split("-").reverse().join("/"),
+    //     dataFim.split("-").reverse().join("/")
+    //   );
+
+    //   if (!resultado.erro) {
+    //     // Correção aqui
+    //     totalDias += resultado.diasTotais;
+    //     console.log(
+    //       `Período: ${resultado.texto} (Total: ${resultado.diasTotais} dias)`
+    //     );
+    //   }
+    // }
+
+
+/* <label for="10anosServico${contador}Inicio">Data início serviço público: </label>
+        <input type="date" name="10anosServico${contador}Inicio" id="id10anosServico${contador}Inicio" />
+        <br /><br />
+
+        <label for="10anosServico${contador}Fim">Data fim serviço público: </label>
+        <input type="date" name="10anosServico${contador}Fim" id="id10anosServico${contador}Fim" />
+        <br /><br /> */
+
+
+        // <label for="10anosServico1Inicio">Data inicio serviço público: </label>
+        // <input
+        //   type="date"
+        //   name="10anosServico1Inicio"
+        //   id="id10anosServico1Inicio"
+        // />
+        // <br /><br />
+        // <label for="10anosServico1Fim">Data fim serviço público</label>
+        // <input type="date" name="10anosServico1Fim" id="id10anosServico1Fim" />
+        // <br /><br />
+
+        // Number(document.getElementById("idDiasAverbados").value) === 0 ||
+        // document.getElementById("idIngressoTRT").value ===
+        //   document.getElementById("id10anosServico1Inicio").value

@@ -19,14 +19,11 @@ function anosDeServico25(diasAverbados, ingressoTRT, deducoes) {
   dtInicial.setDate(dtInicial.getDate() + diasCorretos);
   return dtInicial.toLocaleDateString("pt-BR");
 }
+
 function anosDeServico10(diasAverbados, ingressoTRT) {
   let diasCorretos = 0;
-  if (
-    Number(document.getElementById("idDiasAverbados").value) === 0 ||
-    document.getElementById("idIngressoTRT").value ===
-      document.getElementById("id10anosServico1Inicio").value
-  ) {
-    diasCorretos = 3650;
+  if (diasAverbados === 0) {
+    diasCorretos = 3650 - diasAverbados;
   } else {
     diasCorretos = 3650 - diasAverbados - 1;
   }
@@ -73,30 +70,18 @@ function somarTodosOsPeriodos() {
   let periodos = document.querySelectorAll("[id^=periodo]");
 
   periodos.forEach((periodo) => {
-    let dataInicio = periodo.querySelector(
-      "input[name^='10anosServico'][name$='Inicio']"
-    ).value;
-    let dataFim = periodo.querySelector(
-      "input[name^='10anosServico'][name$='Fim']"
-    ).value;
+    let aposentaInput = periodo.querySelector("input[name^='diasAposenta']");
 
-    if (dataInicio && dataFim) {
-      let resultado = calcularPeriodo(
-        dataInicio.split("-").reverse().join("/"),
-        dataFim.split("-").reverse().join("/")
-      );
-
-      if (!resultado.erro) {
-        // Correção aqui
-        totalDias += resultado.diasTotais;
-        console.log(
-          `Período: ${resultado.texto} (Total: ${resultado.diasTotais} dias)`
-        );
+    if (aposentaInput) {
+      let diasAposenta = Number(aposentaInput.value);
+      if (diasAposenta > 0) {
+        diasAposenta -= 1;
       }
+      totalDias += diasAposenta > 0 ? diasAposenta : 0;
     }
   });
 
-  return totalDias; // Retorna o total de dias calculado
+  return totalDias;
 }
 
 let contador = 1;
@@ -105,12 +90,13 @@ function adicionarPromptTS() {
 
   let novoPeriodo = document.createElement("div");
   novoPeriodo.id = `periodo${contador}`;
-  novoPeriodo.innerHTML = `<label for="10anosServico${contador}Inicio">Data início serviço público: </label>
-        <input type="date" name="10anosServico${contador}Inicio" id="id10anosServico${contador}Inicio" />
+  novoPeriodo.innerHTML = `
+        
+
+        <label for="diasAposenta${contador}">Aposenta: </label>
+        <input type="number" name="diasAposenta${contador}" id="diasAposenta${contador}" />
         <br /><br />
-        <label for="10anosServico${contador}Fim">Data fim serviço público: </label>
-        <input type="date" name="10anosServico${contador}Fim" id="id10anosServico${contador}Fim" />
-        <br /><br />`;
+    `;
 
   let divPrincipal = document.getElementById("periodo10AnosServico");
   let botaoAdicionar = divPrincipal.querySelector("input[type='button']");
