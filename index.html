@@ -18,7 +18,7 @@
     <label for="diasAverbados">Dias averbados: </label>
     <input type="number" name="diasAverbados" id="idDiasAverbados" />
     <br /><br />
-    <label for="ingressoTRT">Ingresso no TRT10</label>
+    <label for="ingressoTRT">Ingresso no TRT10 / Ingresso Órgão Origem</label>
     <input type="date" name="ingressoTRT" id="idIngressoTRT" />
     <br /><br />
     <label for="deducoes">Deduções: </label>
@@ -35,7 +35,11 @@
       <label for="10anosServico1Fim">Data fim serviço público</label>
       <input type="date" name="10anosServico1Fim" id="id10anosServico1Fim" />
       <br /><br />
-      <input type="button" value="+ tempo de serviço" onclick="adicionarPromptTS()"/>
+      <input
+        type="button"
+        value="+ tempo de serviço"
+        onclick="adicionarPromptTS()"
+      />
     </div>
     <br /><br />
     <input type="submit" value="Enviar" onclick="enviar()" />

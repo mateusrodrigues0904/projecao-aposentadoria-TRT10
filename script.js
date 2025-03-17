@@ -20,7 +20,16 @@ function anosDeServico25(diasAverbados, ingressoTRT, deducoes) {
   return dtInicial.toLocaleDateString("pt-BR");
 }
 function anosDeServico10(diasAverbados, ingressoTRT) {
-  const diasCorretos = 3650 - diasAverbados - 1;
+  let diasCorretos = 0;
+  if (
+    Number(document.getElementById("idDiasAverbados").value) === 0 ||
+    document.getElementById("idIngressoTRT").value ===
+      document.getElementById("id10anosServico1Inicio").value
+  ) {
+    diasCorretos = 3650;
+  } else {
+    diasCorretos = 3650 - diasAverbados - 1;
+  }
   let dtInicial = new Date(ingressoTRT.split("/").reverse().join("-"));
   dtInicial.setDate(dtInicial.getDate() + diasCorretos);
   return dtInicial.toLocaleDateString("pt-BR");
