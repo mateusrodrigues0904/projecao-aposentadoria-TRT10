@@ -13,6 +13,26 @@ function idadeAposentadoria(dataNascimento, genero) {
   return data.toLocaleDateString("pt-br");
 }
 
+function idadeAposentadoria2(dataNascimento, genero) {
+  const [ano, mes, dia] = dataNascimento.split("-").map(Number);
+  let data = new Date(ano, mes - 1, dia);
+
+  const anosParaAdicionar = genero === "M" ? 62 : genero === "F" ? 57 : null;
+
+  data.setFullYear(data.getFullYear() + anosParaAdicionar);
+  return data.toLocaleDateString("pt-br");
+}
+
+function idadeAposentadoria3(dataNascimento, genero) {
+  const [ano, mes, dia] = dataNascimento.split("-").map(Number);
+  let data = new Date(ano, mes - 1, dia);
+
+  const anosParaAdicionar = genero === "M" ? 60 : genero === "F" ? 57 : null;
+
+  data.setFullYear(data.getFullYear() + anosParaAdicionar);
+  return data.toLocaleDateString("pt-br");
+}
+
 function anosDeServico25(diasAverbados, ingressoTRT, deducoes) {
   const diasCorretos = 9125 - (diasAverbados - deducoes);
   let dtInicial = new Date(ingressoTRT.split("/").reverse().join("-"));
@@ -26,6 +46,37 @@ function anosDeServico10(diasAverbados, ingressoTRT) {
     diasCorretos = 3650 - diasAverbados;
   } else {
     diasCorretos = 3650 - diasAverbados - 1;
+  }
+  let dtInicial = new Date(ingressoTRT.split("/").reverse().join("-"));
+  dtInicial.setDate(dtInicial.getDate() + diasCorretos);
+  return dtInicial.toLocaleDateString("pt-BR");
+}
+
+function anosDeServico20(diasAverbados, ingressoTRT) {
+  let diasCorretos = 0;
+  if (diasAverbados === 0) {
+    diasCorretos = 7300 - diasAverbados;
+  } else {
+    diasCorretos = 7300 - diasAverbados - 1;
+  }
+  let dtInicial = new Date(ingressoTRT.split("/").reverse().join("-"));
+  dtInicial.setDate(dtInicial.getDate() + diasCorretos);
+  return dtInicial.toLocaleDateString("pt-BR");
+}
+
+function anosDeServico5(ingressoTRT) {
+  const diasCorretos = 1825;
+  let dtInicial = new Date(ingressoTRT.split("/").reverse().join("-"));
+  dtInicial.setDate(dtInicial.getDate() + diasCorretos);
+  return dtInicial.toLocaleDateString("pt-BR");
+}
+
+function anosDeServico35(diasAverbados, ingressoTRT, deducoes, genero) {
+  let diasCorretos = 0;
+  if (genero === "M") {
+    diasCorretos = 12775 - (diasAverbados - deducoes);
+  } else if (genero === "F") {
+    diasCorretos = 10950 - (diasAverbados - deducoes);
   }
   let dtInicial = new Date(ingressoTRT.split("/").reverse().join("-"));
   dtInicial.setDate(dtInicial.getDate() + diasCorretos);
@@ -110,6 +161,7 @@ function enviar() {
   const diasAverbados = document.getElementById("idDiasAverbados").value;
   const ingressoTRT = document.getElementById("idIngressoTRT").value;
   const deducoes = document.getElementById("idDeducoes").value;
+  const cargoAtual = document.getElementById("idCargoAtual").value;
 
   const pIdadeAposentadoria = document.getElementById("idIdadeAposentadoria");
   pIdadeAposentadoria.innerHTML =
@@ -124,4 +176,37 @@ function enviar() {
   document.getElementById(
     "id10AnosServicoPublico"
   ).innerHTML = `10 anos de efetivo exercicio público: ${anosServico10}`;
+
+  const anosCargoEfetivo5 = (document.getElementById(
+    "id5anosCargoEfetivo"
+  ).innerHTML = `5 anos de cargo efetivo: ${anosDeServico5(cargoAtual)}`);
+
+  const pIdadeAposentadoria2 = document.getElementById("idIdadeAposentadoria2");
+  pIdadeAposentadoria2.innerHTML = `Idade de aposentadoria 2: ${idadeAposentadoria2(
+    dataNascimento,
+    genero
+  )}`;
+
+  const p35anosServico = document.getElementById("id35AnosDeContribuicao");
+  p35anosServico.innerHTML =
+    "35 (32) anos de serviço: " +
+    anosDeServico35(diasAverbados, ingressoTRT, deducoes, genero);
+
+  const p20AnosServicoPublico = document.getElementById(
+    "id20AnosServicoPublico"
+  );
+  p20AnosServicoPublico.innerHTML = `20 anos de efetivo exercicio público: ${anosDeServico20(
+    somarTodosOsPeriodos(),
+    ingressoTRT
+  )}`;
+
+  const anos2CargoEfetivo5 = (document.getElementById(
+    "id5anosCargoEfetivo2"
+  ).innerHTML = `5 anos de cargo efetivo: ${anosDeServico5(cargoAtual)}`);
+
+  const pIdadeAposentadoria3 = document.getElementById("idIdadeAposentadoria3");
+  pIdadeAposentadoria3.innerHTML = `Idade de aposentadoria 3: ${idadeAposentadoria3(
+    dataNascimento,
+    genero
+  )}`;
 }
