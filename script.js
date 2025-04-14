@@ -189,7 +189,7 @@ function enviar() {
 
   const p35anosServico = document.getElementById("id35AnosDeContribuicao");
   p35anosServico.innerHTML =
-    "35 (32) anos de serviço: " +
+    "35 (30) anos de serviço: " +
     anosDeServico35(diasAverbados, ingressoTRT, deducoes, genero);
 
   const p20AnosServicoPublico = document.getElementById(
@@ -209,4 +209,10 @@ function enviar() {
     dataNascimento,
     genero
   )}`;
+
+  const p20AnosServicoPublico2 = document.getElementById("id20AnosServicoPublico2");
+  p20AnosServicoPublico2.innerHTML = `20 anos de efetivo exercicio público: ${anosDeServico20(somarTodosOsPeriodos(), ingressoTRT)}`;
+
+  const p5AnosCargoEfetivo3 = document.getElementById("id5anosCargoEfetivo3");
+  p5AnosCargoEfetivo3.innerHTML = `5 anos de cargo efetivo: ${anosDeServico5(cargoAtual)}`;
 }
