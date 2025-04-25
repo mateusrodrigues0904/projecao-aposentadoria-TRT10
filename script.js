@@ -155,6 +155,21 @@ function adicionarPromptTS() {
   divPrincipal.insertBefore(novoPeriodo, botaoAdicionar);
 }
 
+function periodoEmenda(periodoEmenda, genero) {
+  let subDiasLiquidos = 0;
+  if (genero === "M") {
+    subDiasLiquidos = 12775 - periodoEmenda;
+  } else if (genero === "F") {
+    subDiasLiquidos = 10950 - periodoEmenda;
+  }
+  subDiasLiquidos = subDiasLiquidos * 2;
+
+  let dataBase = new Date(2019, 10, 12);
+  dataBase.setDate(dataBase.getDate() + subDiasLiquidos);
+
+  return dataBase.toLocaleDateString("pt-BR");
+}
+
 function enviar() {
   const dataNascimento = document.getElementById("idDataNascimento").value;
   const genero = document.getElementById("idGenero").value.toUpperCase();
@@ -162,6 +177,7 @@ function enviar() {
   const ingressoTRT = document.getElementById("idIngressoTRT").value;
   const deducoes = document.getElementById("idDeducoes").value;
   const cargoAtual = document.getElementById("idCargoAtual").value;
+  const periodoEmendaV = document.getElementById("idPeriodoEmenda").value;
 
   const pIdadeAposentadoria = document.getElementById("idIdadeAposentadoria");
   pIdadeAposentadoria.innerHTML =
@@ -210,9 +226,27 @@ function enviar() {
     genero
   )}`;
 
-  const p20AnosServicoPublico2 = document.getElementById("id20AnosServicoPublico2");
-  p20AnosServicoPublico2.innerHTML = `20 anos de efetivo exercicio público: ${anosDeServico20(somarTodosOsPeriodos(), ingressoTRT)}`;
+  const p20AnosServicoPublico2 = document.getElementById(
+    "id20AnosServicoPublico2"
+  );
+  p20AnosServicoPublico2.innerHTML = `20 anos de efetivo exercicio público: ${anosDeServico20(
+    somarTodosOsPeriodos(),
+    ingressoTRT
+  )}`;
 
   const p5AnosCargoEfetivo3 = document.getElementById("id5anosCargoEfetivo3");
-  p5AnosCargoEfetivo3.innerHTML = `5 anos de cargo efetivo: ${anosDeServico5(cargoAtual)}`;
+  p5AnosCargoEfetivo3.innerHTML = `5 anos de cargo efetivo: ${anosDeServico5(
+    cargoAtual
+  )}`;
+
+  const pPeriodoEmenda = document.getElementById("idPeriodoEmendaP");
+  pPeriodoEmenda.innerHTML = `Periodo adicional de 100% do tempo de contribuição que faltava para completar 35 anos: ${periodoEmenda(
+    periodoEmendaV,
+    genero
+  )}`;
+
+  const p35anosServico3 = document.getElementById("id35anosDeContribuicao3");
+  p35anosServico3.innerHTML =
+    "35 (30) anos de serviço: " +
+    anosDeServico35(diasAverbados, ingressoTRT, deducoes, genero);
 }
